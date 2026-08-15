@@ -32,11 +32,11 @@ output "signer_signing_profiles_revocation_record" {
 }
 output "signer_signing_profiles_signature_validity_period" {
   description = "Map of signature_validity_period values across all signer_signing_profiles, keyed the same as var.signer_signing_profiles"
-  value       = { for k, v in aws_signer_signing_profile.signer_signing_profiles : k => v.signature_validity_period if v.signature_validity_period != null && length(v.signature_validity_period) > 0 }
+  value       = { for k, v in aws_signer_signing_profile.signer_signing_profiles : k => one(v.signature_validity_period) if v.signature_validity_period != null && length(v.signature_validity_period) > 0 }
 }
 output "signer_signing_profiles_signing_material" {
   description = "Map of signing_material values across all signer_signing_profiles, keyed the same as var.signer_signing_profiles"
-  value       = { for k, v in aws_signer_signing_profile.signer_signing_profiles : k => v.signing_material if v.signing_material != null && length(v.signing_material) > 0 }
+  value       = { for k, v in aws_signer_signing_profile.signer_signing_profiles : k => one(v.signing_material) if v.signing_material != null && length(v.signing_material) > 0 }
 }
 output "signer_signing_profiles_signing_parameters" {
   description = "Map of signing_parameters values across all signer_signing_profiles, keyed the same as var.signer_signing_profiles"
